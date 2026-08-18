@@ -38,7 +38,7 @@ const SECTIONS = [
   {
     id: "experience",
     label: "Employee Experience",
-    content: "[Content coming soon]",
+    content: <ExperienceContent />,
   },
   {
     id: "vendors",
