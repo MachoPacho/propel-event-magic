@@ -1,6 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 export const Route = createFileRoute("/proposal")({
   head: () => ({
     meta: [
@@ -268,6 +275,54 @@ function ExperienceContent() {
   );
 }
 
+const BUDGET_ITEMS = [
+  {
+    id: "equipment",
+    category: "Equipment",
+    total: "€3,200",
+    items: [
+      { label: "200 silent disco headsets (100 per office)", cost: "€1,400" },
+      { label: "2 DJs (own equipment, full day)", cost: "€800" },
+      { label: "Portal screen rental (live video link between offices)", cost: "€700" },
+      { label: "Technical reserve", cost: "€300" },
+    ],
+  },
+  {
+    id: "music",
+    category: "Music licensing",
+    total: "€200",
+    items: [
+      { label: "LATGA (public performance license)", cost: "€100" },
+      { label: "AGATA (public performance license)", cost: "€100" },
+    ],
+  },
+  {
+    id: "takeaway",
+    category: "Employee takeaway",
+    total: "€2,560",
+    items: [
+      { label: "In-office gifts, ~260 people × €6", cost: "€1,560" },
+      { label: "Remote digital vouchers, ~100 people × €10", cost: "€1,000" },
+    ],
+  },
+  {
+    id: "catering",
+    category: "Catering",
+    total: "€3,380",
+    items: [
+      { label: "Single vendor for both offices, ~260 people × €13/person", cost: "€3,380" },
+    ],
+  },
+  {
+    id: "decorations",
+    category: "Decorations & atmosphere",
+    total: "€640",
+    items: [
+      { label: "Venue styling for both offices (signage, photo backdrop, ambient decor)", cost: "€640" },
+    ],
+  },
+];
+
 function VendorsContent() {
   return (
     <div className="space-y-8">
@@ -291,56 +346,33 @@ function VendorsContent() {
         <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
           Budget Breakdown
         </h3>
-        <div className="mt-4 overflow-hidden rounded-xl border border-border">
-          <table className="w-full text-left text-sm text-card-foreground/80">
-            <thead className="bg-muted/50 text-card-foreground">
-              <tr>
-                <th className="px-4 py-3 font-semibold">Category</th>
-                <th className="px-4 py-3 font-semibold">Details</th>
-                <th className="px-4 py-3 font-semibold">Cost</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              <tr>
-                <td className="px-4 py-3 align-top font-medium">Equipment</td>
-                <td className="px-4 py-3">
-                  200 silent disco headsets (100 per office) + 2 DJs, Portal screen rental for the
-                  live video link, technical reserve
-                </td>
-                <td className="px-4 py-3 align-top whitespace-nowrap">€3,200</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 align-top font-medium">Music licensing</td>
-                <td className="px-4 py-3">
-                  Public performance licensing for live DJ sets, both offices
-                </td>
-                <td className="px-4 py-3 align-top whitespace-nowrap">€200</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 align-top font-medium">Employee takeaway</td>
-                <td className="px-4 py-3">
-                  Small in-office gift (~260 people) + digital voucher for remote employees (~100
-                  people)
-                </td>
-                <td className="px-4 py-3 align-top whitespace-nowrap">€2,560</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 align-top font-medium">Catering</td>
-                <td className="px-4 py-3">Single vendor serving both Vilnius and Kaunas identically</td>
-                <td className="px-4 py-3 align-top whitespace-nowrap">€3,380</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 align-top font-medium">Decorations & atmosphere</td>
-                <td className="px-4 py-3">Visual styling for both venues</td>
-                <td className="px-4 py-3 align-top whitespace-nowrap">€640</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 align-top font-semibold">Total</td>
-                <td className="px-4 py-3" />
-                <td className="px-4 py-3 align-top whitespace-nowrap font-semibold">€9,980</td>
-              </tr>
-            </tbody>
-          </table>
+        <Accordion type="multiple" className="mt-4 overflow-hidden rounded-xl border border-border">
+          {BUDGET_ITEMS.map((item) => (
+            <AccordionItem
+              key={item.id}
+              value={item.id}
+              className="border-b border-border last:border-b-0"
+            >
+              <AccordionTrigger className="px-4 text-card-foreground hover:no-underline">
+                <span className="font-medium">{item.category}</span>
+                <span className="ml-auto mr-4 font-semibold tabular-nums">{item.total}</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 text-card-foreground/80">
+                <ul className="space-y-2 border-t border-border/50 pt-3">
+                  {item.items.map((sub) => (
+                    <li key={sub.label} className="flex justify-between gap-4">
+                      <span>{sub.label}</span>
+                      <span className="tabular-nums">{sub.cost}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+        <div className="mt-4 flex items-center justify-between rounded-lg border border-border bg-muted/50 px-4 py-3">
+          <span className="font-semibold text-card-foreground">Total</span>
+          <span className="font-bold tabular-nums text-card-foreground">€9,980</span>
         </div>
         <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
           The full amount stays within the €10,000 limit, with a small buffer for last-minute
