@@ -223,7 +223,7 @@ function ExperienceContent() {
         </h3>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-card-foreground/80">
           <li>
-            <strong>Silent disco</strong> — 200 headsets across both offices, two live DJs, and three
+            <strong>Silent disco</strong> — 200 headsets across both offices, two live DJs, and two
             listening channels: your local DJ, a cross-city channel to tune into the other office's
             DJ live, and a shared collaborative board that remote employees control in real time,
             projected as visuals behind the DJs.
