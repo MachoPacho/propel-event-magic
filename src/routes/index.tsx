@@ -82,7 +82,7 @@ function LandingPage() {
 
   return (
     <section className="relative flex min-h-[calc(100vh-3.5rem)] flex-col items-center justify-center overflow-hidden px-4 text-center">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(99,102,241,0.12),transparent_50%)]" />
+      <div className="pointer-events-none absolute left-1/2 top-[40%] h-[60vh] w-[60vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="relative z-10 flex flex-col items-center">
         <div
