@@ -42,11 +42,25 @@ function BonusPage() {
         position at Hostinger.
       </p>
 
-      <div className="mt-10 rounded-2xl border border-dashed border-border bg-card p-8 text-center sm:p-12">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-card-foreground">
-          Game
-        </h2>
-        <p className="mt-3 text-base text-muted-foreground">Coming soon</p>
+      <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-card">
+        <iframe
+          src="/game.html"
+          title="Server Clicker game"
+          className="h-[780px] w-full md:h-[700px]"
+          style={{ border: 0 }}
+          loading="lazy"
+        />
+      </div>
+
+      <div className="mt-4 text-center">
+        <a
+          href="/game.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Open in fullscreen
+        </a>
       </div>
     </div>
   );
