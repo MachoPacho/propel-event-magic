@@ -10,7 +10,7 @@ A three-view, front-end-only presentation site for an Event Manager application 
 
 ## Landing (`/`)
 
-- Full-screen counter animating 0 → 10,000,000 over roughly 4 seconds with an ease-out curve, monospaced-width digits so the layout doesn't jitter.
+- Full-screen counter animating 9,998,000 → 10,000,000 over roughly 4 seconds with an ease-out curve, monospaced-width digits so the layout doesn't jitter.
 - On completion the number settles and the label "10,000,000 Online" fades in beneath it.
 - After a short pause two CTAs appear:
   - "The Proposal" — large, filled, high-contrast primary button, first in order.
