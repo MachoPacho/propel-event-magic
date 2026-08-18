@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 
 const START_VALUE = 9_998_000;
 const TARGET_VALUE = 10_000_000;
-const DURATION_MS = 4000;
+const DURATION_MS = 2500;
 
 function easeOutQuart(t: number) {
   return 1 - Math.pow(1 - t, 4);
