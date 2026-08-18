@@ -46,11 +46,13 @@ function LandingPage() {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    const alreadyPlayed = sessionStorage.getItem("landingIntroPlayed") === "true";
+
+    if (alreadyPlayed || prefersReducedMotion) {
       setDisplayValue(TARGET_VALUE);
       setIsComplete(true);
-      const timer = setTimeout(() => setShowCTAs(true), 600);
-      return () => clearTimeout(timer);
+      setShowCTAs(true);
+      return;
     }
 
     const startTime = performance.now();
@@ -68,7 +70,10 @@ function LandingPage() {
       } else {
         setDisplayValue(TARGET_VALUE);
         setIsComplete(true);
-        setTimeout(() => setShowCTAs(true), 800);
+        setTimeout(() => {
+          setShowCTAs(true);
+          sessionStorage.setItem("landingIntroPlayed", "true");
+        }, 800);
       }
     };
 
