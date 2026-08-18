@@ -97,7 +97,7 @@ function ProposalPage() {
                   {section.content}
                 </p>
               </div>
-            ) : null
+            ) : null,
           )}
         </section>
       </div>

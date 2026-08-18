@@ -42,8 +42,7 @@ function LandingPage() {
   const [isComplete, setIsComplete] = useState(false);
   const [showCTAs, setShowCTAs] = useState(false);
   const prefersReducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
