@@ -179,6 +179,95 @@ function ConceptContent() {
   );
 }
 
+function ExperienceContent() {
+  return (
+    <div className="space-y-8">
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Walking Through the Day
+        </h3>
+        <div className="mt-4 space-y-4 text-base leading-relaxed text-card-foreground/80">
+          <p>
+            <strong>14:45–15:00 — The countdown.</strong> Employees gather near screens in both
+            offices as the Slack reminder goes out. At 15:00, the counter hits 10,000,000 in perfect
+            sync across Vilnius and Kaunas — a toast, a group photo, and a moment everyone is
+            encouraged to share on social media.
+          </p>
+          <p>
+            <strong>15:15–16:45 — Back to normal work.</strong> A deliberately short,
+            non-disruptive break in the day — not a full afternoon off.
+          </p>
+          <p>
+            <strong>16:45 onward — The celebration begins.</strong> Food is ready, everyone gathers
+            in a shared space, and a short welcome connects both offices live before the main event
+            starts.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Food & Drinks
+        </h3>
+        <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
+          A shared catering partner serves both offices, so the experience feels identical in
+          Vilnius and Kaunas rather than two separate parties. The final menu will be confirmed
+          closer to the date based on dietary needs collected from attendees — the priority is
+          quality over quantity, keeping the format casual and easy to enjoy while mingling.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Activities & Engagement
+        </h3>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-card-foreground/80">
+          <li>
+            <strong>Silent disco</strong> — 200 headsets across both offices, two live DJs, and three
+            listening channels: your local DJ, a cross-city channel to tune into the other office's
+            DJ live, and a shared collaborative board that remote employees control in real time,
+            projected as visuals behind the DJs.
+          </li>
+          <li>
+            <strong>The Portal</strong> — a live video link between Vilnius and Kaunas lets
+            employees see and wave to colleagues in the other office in real time. Paired with the
+            quiet audio environment of the silent disco, it's an easy, low-pressure way to connect
+            across cities.
+          </li>
+          <li>
+            <strong>Freedom to move</strong> — headsets can be worn around the neck while mingling;
+            there's no fixed seating or schedule beyond the two anchor moments (15:00 and
+            17:00–19:30).
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Remote Employee Experience
+        </h3>
+        <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
+          Full live participation in the evening isn't realistic across time zones, so remote
+          colleagues get two dedicated ways in: real-time control of the visual channel powering the
+          silent disco's shared board, and a short (2–3 minute) highlight video published within
+          24–48 hours after the event, capturing the atmosphere of both offices.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Memorable Takeaway
+        </h3>
+        <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
+          Every in-office attendee receives a small physical gift to mark the milestone. Remote
+          employees receive a digital voucher (an audiobook platform subscription, for example) — a
+          takeaway that works just as well wherever they're logging in from.
+        </p>
+      </section>
+    </div>
+  );
+}
+
 function ProposalPage() {
   const [activeSection, setActiveSection] = useState<SectionId>("concept");
 
