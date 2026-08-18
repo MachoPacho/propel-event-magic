@@ -275,6 +275,54 @@ function ExperienceContent() {
   );
 }
 
+const BUDGET_ITEMS = [
+  {
+    id: "equipment",
+    category: "Equipment",
+    total: "€3,200",
+    items: [
+      { label: "200 silent disco headsets (100 per office)", cost: "€1,400" },
+      { label: "2 DJs (own equipment, full day)", cost: "€800" },
+      { label: "Portal screen rental (live video link between offices)", cost: "€700" },
+      { label: "Technical reserve", cost: "€300" },
+    ],
+  },
+  {
+    id: "music",
+    category: "Music licensing",
+    total: "€200",
+    items: [
+      { label: "LATGA (public performance license)", cost: "€100" },
+      { label: "AGATA (public performance license)", cost: "€100" },
+    ],
+  },
+  {
+    id: "takeaway",
+    category: "Employee takeaway",
+    total: "€2,560",
+    items: [
+      { label: "In-office gifts, ~260 people × €6", cost: "€1,560" },
+      { label: "Remote digital vouchers, ~100 people × €10", cost: "€1,000" },
+    ],
+  },
+  {
+    id: "catering",
+    category: "Catering",
+    total: "€3,380",
+    items: [
+      { label: "Single vendor for both offices, ~260 people × €13/person", cost: "€3,380" },
+    ],
+  },
+  {
+    id: "decorations",
+    category: "Decorations & atmosphere",
+    total: "€640",
+    items: [
+      { label: "Venue styling for both offices (signage, photo backdrop, ambient decor)", cost: "€640" },
+    ],
+  },
+];
+
 function VendorsContent() {
   return (
     <div className="space-y-8">
