@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server Clicker — Grow Hostinger to 10,000,000 Websites</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-border: #262b36;
+    --text: #e8eaed;
+    --text-dim: #8a90a0;
+    --accent: #6d5bff;
+    --accent-2: #3ddc97;
+    --accent-culture: #f2b84b;
+    --shadow: rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+  }
+
+  .counter {
+    font-size: clamp(2.6rem, 11vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 4px 0 2px;
+    cursor: default;
+    letter-spacing: -0.02em;
+  }
+
+  .counter-label {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .rate {
+    color: var(--accent-2);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    min-height: 1.3em;
+  }
+
+  .endless-tag {
+    display: none;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .endless-tag.show { display: block; }
+
+  .click-btn {
+    margin-top: 18px;
+    width: 200px;
+    height: 200px;
+    border-radius: 28px;
+    border: none;
+    background: linear-gradient(160deg, var(--accent), #4a3bd6);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: transform 0.06s ease, box-shadow 0.06s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .click-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 4px 14px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+
+  .click-btn .icon {
+    font-size: 2.6rem;
+    line-height: 1;
+  }
+
+  .click-plus {
+    position: relative;
+    height: 0;
+    width: 100%;
+  }
+
+  .float-plus {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    color: var(--accent-2);
+    font-weight: 700;
+    font-size: 1.1rem;
+    pointer-events: none;
+    animation: floatUp 0.7s ease-out forwards;
+    white-space: nowrap;
+  }
+
+  @keyframes floatUp {
+    0%   { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -46px); }
+  }
+
+  .shop {
+    width: 100%;
+    margin-top: 36px;
+  }
+
+  .shop h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 10px;
+  }
+
+  .upgrade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+    font-family: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .upgrade:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #1c2029;
+  }
+
+  .upgrade:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .upgrade-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .upgrade-name {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .upgrade-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .upgrade-owned {
+    font-size: 0.75rem;
+    color: var(--accent-2);
+    font-weight: 600;
+  }
+
+  .upgrade-cost {
+    flex-shrink: 0;
+    text-align: right;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-2);
+  }
+
+  .upgrade-cost small {
+    display: block;
+    font-weight: 400;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+  }
+
+  /* Culture & Team */
+  .culture {
+    width: 100%;
+    margin-top: 36px;
+    padding: 18px 16px 6px;
+    border: 1px solid #4a3a1f;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(242,184,75,0.07), rgba(242,184,75,0.02));
+  }
+
+  .culture-header h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-culture);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 4px;
+  }
+
+  .culture-header p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+
+  .culture-section { margin-bottom: 20px; }
+  .culture-section:last-child { margin-bottom: 4px; }
+
+  .culture-section-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .culture-section-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent-culture);
+    white-space: nowrap;
+  }
+
+  .culture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 8px;
+  }
+
+  .culture-item {
+    background: #1a1710;
+    border: 1px solid #3a2e18;
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+    color: var(--text);
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .culture-item:hover:not(:disabled) {
+    border-color: var(--accent-culture);
+    background: #221c10;
+  }
+
+  .culture-item:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .culture-item.owned {
+    border-color: var(--accent-culture);
+    background: rgba(242,184,75,0.14);
+    opacity: 1;
+    cursor: default;
+  }
+
+  .culture-item-name {
+    font-size: 0.83rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .culture-item-status {
+    font-size: 0.72rem;
+    color: var(--accent-culture);
+    font-weight: 600;
+  }
+
+  .culture-item-status.locked {
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  /* Bonus events */
+  .bonus-icon {
+    position: fixed;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: radial-gradient(circle at 30% 30%, #ffe9a8, var(--accent-culture) 60%, #c98a1f);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    font-size: 1.6rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    animation: bonusPulse 1.4s ease-in-out infinite;
+    padding: 0;
+  }
+
+  @keyframes bonusPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(242,184,75,0.55), 0 6px 20px rgba(0,0,0,0.5); transform: scale(1); }
+    70%  { box-shadow: 0 0 0 14px rgba(242,184,75,0), 0 6px 20px rgba(0,0,0,0.5); transform: scale(1.06); }
+    100% { box-shadow: 0 0 0 0 rgba(242,184,75,0), 0 6px 20px rgba(0,0,0,0.5); transform: scale(1); }
+  }
+
+  .bonus-indicator {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: var(--panel);
+    border: 1px solid var(--accent-culture);
+    color: var(--accent-culture);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px var(--shadow);
+    z-index: 998;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+  .bonus-indicator.show { opacity: 1; transform: translateY(0); }
+
+  /* Toasts */
+  .toast-stack {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+    width: min(92vw, 480px);
+    align-items: center;
+  }
+
+  .toast {
+    background: var(--panel);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 24px var(--shadow);
+    animation: toastIn 0.35s ease-out, toastOut 0.5s ease-in 5.5s forwards;
+    width: 100%;
+  }
+
+  .toast .toast-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .toast .toast-body {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes toastOut {
+    to { opacity: 0; transform: translateY(-10px); }
+  }
+
+  footer {
+    margin-top: 40px;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="toast-stack" id="toastStack"></div>
+<div class="bonus-indicator" id="bonusIndicator"></div>
+<button class="bonus-icon" id="bonusIcon" type="button" aria-label="Bonus event"></button>
+
+<div class="wrap">
+  <header>
+    <h1>Grow Hostinger</h1>
+  </header>
+
+  <div class="counter-label">websites deployed</div>
+  <div class="counter" id="counter" title="0">0</div>
+  <div class="rate" id="rate"></div>
+  <div class="endless-tag" id="endlessTag">10,000,000+ and counting</div>
+
+  <button class="click-btn" id="clickBtn">
+    <div class="icon">🌐</div>
+    <div>Deploy a website</div>
+    <div class="click-plus" id="clickPlus"></div>
+  </button>
+
+  <div class="shop">
+    <h2>Shop</h2>
+    <button class="upgrade" id="upgrade-0">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Fast storage, one website at a time.">💾 SSD Drive</div>
+        <div class="upgrade-desc">+1 website / sec</div>
+        <div class="upgrade-owned" id="owned-0">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-0">10<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-1">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Someone has to actually run this place.">🧑‍💻 Employee</div>
+        <div class="upgrade-desc">+8 websites / sec</div>
+        <div class="upgrade-owned" id="owned-1">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-1">100<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-2">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Kodee doesn't sleep, doesn't take lunch, and definitely doesn't complain about on-call.">🤖 Kodee</div>
+        <div class="upgrade-desc">+50 websites / sec</div>
+        <div class="upgrade-owned" id="owned-2">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-2">1,000<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-3">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Racks upon racks, humming quietly, doing the real work.">🏭 Data Center</div>
+        <div class="upgrade-desc">+300 websites / sec</div>
+        <div class="upgrade-owned" id="owned-3">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-3">10,000<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-4">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Buying up every catchy .com before someone else does.">🏷️ Domain Rush</div>
+        <div class="upgrade-desc">+1,800 websites / sec</div>
+        <div class="upgrade-owned" id="owned-4">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-4">100,000<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-5">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Scales itself. Mostly. Don't ask about the bill.">☁️ Cloud Hosting Cluster</div>
+        <div class="upgrade-desc">+11,000 websites / sec</div>
+        <div class="upgrade-owned" id="owned-5">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-5">1,000,000<small>websites</small></div>
+    </button>
+
+    <button class="upgrade" id="upgrade-6">
+      <div class="upgrade-info">
+        <div class="upgrade-name" title="Your websites, now everywhere, all at once.">🛰️ Global CDN Network</div>
+        <div class="upgrade-desc">+65,000 websites / sec</div>
+        <div class="upgrade-owned" id="owned-6">Owned: 0</div>
+      </div>
+      <div class="upgrade-cost" id="cost-6">10,000,000<small>websites</small></div>
+    </button>
+  </div>
+
+  <div class="culture">
+    <div class="culture-header">
+      <h2>Culture &amp; Team</h2>
+      <p>Doesn't produce websites directly — it multiplies what you've already got.</p>
+    </div>
+
+    <div class="culture-section">
+      <div class="culture-section-title">
+        <span>Our 10 Principles</span>
+        <span class="culture-section-tag">+5% total production, each</span>
+      </div>
+      <div class="culture-grid" id="principlesGrid"></div>
+    </div>
+
+    <div class="culture-section">
+      <div class="culture-section-title">
+        <span>Peak Performance Pulse</span>
+        <span class="culture-section-tag">+8% Employee output, each</span>
+      </div>
+      <div class="culture-grid" id="pulseGrid"></div>
+    </div>
+  </div>
+
+  <footer>Goal: 10,000,000 websites. Progress saves automatically in this browser.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SAVE_KEY = "hostinger-clicker-save-v1";
+
+  var UPGRADES = [
+    { id: 0, name: "SSD Drive",              baseCost: 10,       rate: 1     },
+    { id: 1, name: "Employee",               baseCost: 100,      rate: 8     },
+    { id: 2, name: "Kodee",                  baseCost: 1000,     rate: 50    },
+    { id: 3, name: "Data Center",            baseCost: 10000,    rate: 300   },
+    { id: 4, name: "Domain Rush",            baseCost: 100000,   rate: 1800  },
+    { id: 5, name: "Cloud Hosting Cluster",  baseCost: 1000000,  rate: 11000 },
+    { id: 6, name: "Global CDN Network",     baseCost: 10000000, rate: 65000 }
+  ];
+
+  var MILESTONES = [
+    { at: 50,        shown: false, title: "2004",  body: "A group of young entrepreneurs bootstrap a personal company in Kaunas, naming it Hosting Media." },
+    { at: 500,       shown: false, title: "2011",  body: "Hostinger is born." },
+    { at: 5000,      shown: false, title: "2019",  body: "The Hostinger team reaches 400+ people worldwide." },
+    { at: 50000,     shown: false, title: "2020",  body: "Hostinger becomes the fastest-growing web hosting company in the world." },
+    { at: 500000,    shown: false, title: "2021",  body: "Hostinger integrates Zyro Website Builder." },
+    { at: 2000000,   shown: false, title: "2023",  body: "Kodee, the AI chatbot, launches to support Hostinger's clients." },
+    { at: 10000000,  shown: false, title: "Today", body: "Hostinger serves over 5M clients and has grown almost 100x in the past 10 years. And now: 10,000,000 websites online." }
+  ];
+
+  var PRINCIPLES = [
+    { id: 0, name: "Customer Obsession",        cost: 300,      unlockAt: 0,        tooltip: "Start with the customer and work backwards from there." },
+    { id: 1, name: "Ownership",                 cost: 3000,     unlockAt: 1500,     tooltip: "Act like it's your company, not just your job." },
+    { id: 2, name: "Freedom and Responsibility", cost: 18000,    unlockAt: 8000,     tooltip: "Fewer rules, more trust — and the accountability that comes with it." },
+    { id: 3, name: "Courage and Candidness",    cost: 75000,    unlockAt: 30000,    tooltip: "Say the hard thing, especially when it's the useful thing." },
+    { id: 4, name: "Deliver Results",           cost: 350000,   unlockAt: 120000,   tooltip: "Effort is nice. Shipping is better." },
+    { id: 5, name: "Highest Standards",         cost: 1500000,  unlockAt: 600000,   tooltip: "Good enough rarely is." },
+    { id: 6, name: "Bias Towards Action",       cost: 4500000,  unlockAt: 1500000,  tooltip: "Decide, move, adjust — don't wait for certainty." },
+    { id: 7, name: "Focus",                     cost: 12000000, unlockAt: 3500000,  tooltip: "Say no to almost everything so the important thing gets done." },
+    { id: 8, name: "Hire and Develop the Best", cost: 30000000, unlockAt: 6500000,  tooltip: "Great teams are built on purpose, not by accident." },
+    { id: 9, name: "Learn and Be Curious",      cost: 90000000, unlockAt: 10000000, tooltip: "Stay a beginner at something, always." }
+  ];
+
+  var PULSES = [
+    { id: 0, name: "Self-Reflection",           cost: 800,     unlockAt: 500,     tooltip: "Taking a beat to ask how things are actually going." },
+    { id: 1, name: "One-on-One Meetings",       cost: 9000,    unlockAt: 4000,    tooltip: "Regular, honest check-ins between managers and their people." },
+    { id: 2, name: "Feedback Dot",              cost: 40000,   unlockAt: 15000,   tooltip: "A quick, anonymous pulse-check on team sentiment." },
+    { id: 3, name: "Manager's 360° Feedback",   cost: 180000,  unlockAt: 60000,   tooltip: "Managers get reviewed too — from every direction." },
+    { id: 4, name: "Team Effectiveness",        cost: 900000,  unlockAt: 300000,  tooltip: "Measuring whether the team is more than the sum of its parts." },
+    { id: 5, name: "Performance Pulse",         cost: 6000000, unlockAt: 2000000, tooltip: "A regular read on morale before small issues become big ones." },
+    { id: 6, name: "Calibration Sessions",      cost: 60000000, unlockAt: 8000000, tooltip: "Making sure feedback is fair and consistent across the board." }
+  ];
+
+  var state = {
+    count: 0,
+    owned: UPGRADES.map(function () { return 0; }),
+    totalEarned: 0,
+    principles: PRINCIPLES.map(function () { return false; }),
+    pulses: PULSES.map(function () { return false; })
+  };
+
+  function loadSave() {
+    try {
+      var raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (typeof data.count === "number") state.count = data.count;
+      if (Array.isArray(data.owned)) state.owned = data.owned;
+      // Saves from before later tiers existed are shorter than UPGRADES;
+      // pad with zeros so newly-added tiers don't read as undefined/NaN.
+      while (state.owned.length < UPGRADES.length) state.owned.push(0);
+      if (typeof data.totalEarned === "number") state.totalEarned = data.totalEarned;
+      if (Array.isArray(data.principles)) state.principles = data.principles;
+      if (Array.isArray(data.pulses)) state.pulses = data.pulses;
+      // Saves from before totalEarned existed would otherwise re-lock
+      // already-reachable Culture & Team items for returning players.
+      state.totalEarned = Math.max(state.totalEarned, state.count);
+      if (Array.isArray(data.milestonesShown)) {
+        data.milestonesShown.forEach(function (at) {
+          MILESTONES.forEach(function (m) {
+            if (m.at === at) m.shown = true;
+          });
+        });
+      }
+    } catch (e) { /* ignore corrupt save */ }
+  }
+
+  function saveGame() {
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify({
+        count: state.count,
+        owned: state.owned,
+        totalEarned: state.totalEarned,
+        principles: state.principles,
+        pulses: state.pulses,
+        milestonesShown: MILESTONES.filter(function (m) { return m.shown; }).map(function (m) { return m.at; })
+      }));
+    } catch (e) { /* storage unavailable, ignore */ }
+  }
+
+  function costFor(upgrade) {
+    var owned = state.owned[upgrade.id];
+    return Math.ceil(upgrade.baseCost * Math.pow(1.15, owned));
+  }
+
+  function employeeMultiplier() {
+    return 1 + 0.08 * state.pulses.filter(Boolean).length;
+  }
+
+  function totalMultiplier() {
+    return 1 + 0.05 * state.principles.filter(Boolean).length;
+  }
+
+  function ratePerSec() {
+    var base = 0;
+    UPGRADES.forEach(function (u) {
+      var rate = u.id === 1 ? u.rate * employeeMultiplier() : u.rate;
+      base += rate * state.owned[u.id];
+    });
+    base *= totalMultiplier();
+
+    if (activeBonus) {
+      if (activeBonus.endsAt > Date.now()) {
+        base *= activeBonus.multiplier;
+      } else {
+        activeBonus = null;
+      }
+    }
+    return base;
+  }
+
+  function abbreviate(n) {
+    n = Math.floor(n);
+    if (n < 1000) return String(n);
+    var units = [
+      { v: 1e12, s: "T" },
+      { v: 1e9,  s: "B" },
+      { v: 1e6,  s: "M" },
+      { v: 1e3,  s: "K" }
+    ];
+    for (var i = 0; i < units.length; i++) {
+      if (n >= units[i].v) {
+        var val = n / units[i].v;
+        var str = val >= 100 ? val.toFixed(0) : val.toFixed(1);
+        str = str.replace(/\.0$/, "");
+        return str + units[i].s;
+      }
+    }
+    return String(n);
+  }
+
+  function formatExact(n) {
+    return Math.floor(n).toLocaleString("en-US");
+  }
+
+  var counterEl = document.getElementById("counter");
+  var rateEl = document.getElementById("rate");
+  var endlessTagEl = document.getElementById("endlessTag");
+  var clickBtn = document.getElementById("clickBtn");
+  var clickPlusEl = document.getElementById("clickPlus");
+  var toastStack = document.getElementById("toastStack");
+  var principlesGridEl = document.getElementById("principlesGrid");
+  var pulseGridEl = document.getElementById("pulseGrid");
+  var bonusIconEl = document.getElementById("bonusIcon");
+  var bonusIndicatorEl = document.getElementById("bonusIndicator");
+
+  function buildCultureSection(containerEl, items, onBuy) {
+    items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.className = "culture-item";
+      btn.type = "button";
+      btn.dataset.id = String(item.id);
+      btn.title = item.tooltip;
+      btn.innerHTML =
+        '<div class="culture-item-name">' + escapeHtml(item.name) + '</div>' +
+        '<div class="culture-item-status"></div>';
+      btn.addEventListener("click", function () { onBuy(item); });
+      containerEl.appendChild(btn);
+    });
+  }
+
+  function updateCultureSection(containerEl, items, ownedArr) {
+    items.forEach(function (item) {
+      var btn = containerEl.querySelector('[data-id="' + item.id + '"]');
+      var statusEl = btn.querySelector(".culture-item-status");
+      var owned = ownedArr[item.id];
+      var locked = !owned && state.totalEarned < item.unlockAt;
+
+      btn.classList.toggle("owned", owned);
+
+      if (owned) {
+        statusEl.textContent = "Owned ✓";
+        statusEl.classList.remove("locked");
+        btn.disabled = true;
+      } else if (locked) {
+        statusEl.textContent = "Unlocks at " + abbreviate(item.unlockAt) + " websites";
+        statusEl.classList.add("locked");
+        btn.disabled = true;
+      } else {
+        statusEl.textContent = formatExact(item.cost) + " websites";
+        statusEl.classList.remove("locked");
+        btn.disabled = state.count < item.cost;
+      }
+    });
+  }
+
+  function buyPrinciple(item) {
+    if (state.principles[item.id]) return;
+    if (state.totalEarned < item.unlockAt) return;
+    if (state.count < item.cost) return;
+    state.count -= item.cost;
+    state.principles[item.id] = true;
+    render();
+    saveGame();
+  }
+
+  function buyPulse(item) {
+    if (state.pulses[item.id]) return;
+    if (state.totalEarned < item.unlockAt) return;
+    if (state.count < item.cost) return;
+    state.count -= item.cost;
+    state.pulses[item.id] = true;
+    render();
+    saveGame();
+  }
+
+  buildCultureSection(principlesGridEl, PRINCIPLES, buyPrinciple);
+  buildCultureSection(pulseGridEl, PULSES, buyPulse);
+
+  function render() {
+    counterEl.textContent = abbreviate(state.count);
+    counterEl.title = formatExact(state.count) + " websites";
+
+    var rps = ratePerSec();
+    rateEl.textContent = rps > 0 ? ("+" + abbreviate(rps) + " / sec") : "";
+
+    if (state.count >= 10000000) {
+      endlessTagEl.classList.add("show");
+    }
+
+    UPGRADES.forEach(function (u) {
+      var cost = costFor(u);
+      var btn = document.getElementById("upgrade-" + u.id);
+      var costEl = document.getElementById("cost-" + u.id);
+      var ownedEl = document.getElementById("owned-" + u.id);
+
+      costEl.innerHTML = formatExact(cost) + "<small>websites</small>";
+      costEl.title = cost.toLocaleString("en-US") + " websites";
+      ownedEl.textContent = "Owned: " + state.owned[u.id];
+      btn.disabled = state.count < cost;
+    });
+
+    updateCultureSection(principlesGridEl, PRINCIPLES, state.principles);
+    updateCultureSection(pulseGridEl, PULSES, state.pulses);
+  }
+
+  function addWebsites(amount) {
+    state.count += amount;
+    state.totalEarned += amount;
+    checkMilestones();
+    render();
+  }
+
+  function checkMilestones() {
+    MILESTONES.forEach(function (m) {
+      if (!m.shown && state.count >= m.at) {
+        m.shown = true;
+        showToast(m.title, m.body);
+      }
+    });
+  }
+
+  function showToast(title, body) {
+    var toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML =
+      '<div class="toast-title">' + escapeHtml(title) + '</div>' +
+      '<div class="toast-body">' + escapeHtml(body) + '</div>';
+    toastStack.appendChild(toast);
+    setTimeout(function () {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 6100);
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function spawnFloatPlus(text) {
+    var el = document.createElement("div");
+    el.className = "float-plus";
+    el.textContent = text;
+    el.style.left = (45 + Math.random() * 10) + "%";
+    clickPlusEl.appendChild(el);
+    setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 720);
+  }
+
+  function clickValue() {
+    return Math.max(1, Math.round(ratePerSec() * 0.05));
+  }
+
+  clickBtn.addEventListener("click", function () {
+    var amount = clickValue();
+    addWebsites(amount);
+    spawnFloatPlus("+" + abbreviate(amount));
+    saveGame();
+  });
+
+  UPGRADES.forEach(function (u) {
+    document.getElementById("upgrade-" + u.id).addEventListener("click", function () {
+      var cost = costFor(u);
+      if (state.count < cost) return;
+      state.count -= cost;
+      state.owned[u.id] += 1;
+      checkMilestones();
+      render();
+      saveGame();
+    });
+  });
+
+  var activeBonus = null; // { key, label, multiplier, endsAt } — not persisted, purely transient
+
+  var BONUS_TYPES = [
+    { key: "winterfest", label: "Winterfest",  icon: "❄️", multiplier: 5,  weight: 0.7 },
+    { key: "summerfest", label: "Summer Fest", icon: "☀️", multiplier: 10, weight: 0.3 }
+  ];
+
+  function pickBonusType() {
+    var roll = Math.random();
+    var cumulative = 0;
+    for (var i = 0; i < BONUS_TYPES.length; i++) {
+      cumulative += BONUS_TYPES[i].weight;
+      if (roll < cumulative) return BONUS_TYPES[i];
+    }
+    return BONUS_TYPES[0];
+  }
+
+  function randomBonusDelay() {
+    return 90000 + Math.random() * 90000; // 90s - 180s
+  }
+
+  function scheduleNextBonusSpawn() {
+    if (window.__hostingerBonusSpawnTimeout) clearTimeout(window.__hostingerBonusSpawnTimeout);
+    window.__hostingerBonusSpawnTimeout = setTimeout(spawnBonusIcon, randomBonusDelay());
+  }
+
+  function spawnBonusIcon() {
+    var type = pickBonusType();
+    var left = 10 + Math.random() * 72;
+    var top = 14 + Math.random() * 64;
+    bonusIconEl.style.left = left + "%";
+    bonusIconEl.style.top = top + "%";
+    bonusIconEl.textContent = type.icon;
+    bonusIconEl.title = type.label + " — click for a " + type.multiplier + "x production boost!";
+    bonusIconEl.style.display = "flex";
+
+    var claimed = false;
+    function onClick() {
+      if (claimed) return;
+      claimed = true;
+      bonusIconEl.removeEventListener("click", onClick);
+      bonusIconEl.style.display = "none";
+      if (window.__hostingerBonusHideTimeout) clearTimeout(window.__hostingerBonusHideTimeout);
+      activeBonus = { key: type.key, label: type.label, multiplier: type.multiplier, endsAt: Date.now() + 30000 };
+      updateBonusIndicator();
+      scheduleNextBonusSpawn();
+    }
+    bonusIconEl.addEventListener("click", onClick);
+
+    if (window.__hostingerBonusHideTimeout) clearTimeout(window.__hostingerBonusHideTimeout);
+    window.__hostingerBonusHideTimeout = setTimeout(function () {
+      if (claimed) return;
+      bonusIconEl.removeEventListener("click", onClick);
+      bonusIconEl.style.display = "none";
+      scheduleNextBonusSpawn();
+    }, 15000);
+  }
+
+  function updateBonusIndicator() {
+    if (!activeBonus || activeBonus.endsAt <= Date.now()) {
+      activeBonus = null;
+      bonusIndicatorEl.classList.remove("show");
+      return;
+    }
+    var remaining = Math.max(0, Math.ceil((activeBonus.endsAt - Date.now()) / 1000));
+    var mm = Math.floor(remaining / 60);
+    var ss = remaining % 60;
+    bonusIndicatorEl.textContent = activeBonus.label + " active — " + activeBonus.multiplier + "x! " +
+      mm + ":" + (ss < 10 ? "0" : "") + ss;
+    bonusIndicatorEl.classList.add("show");
+  }
+
+  // Only one income loop, save loop, and bonus loop should ever run. Clearing
+  // any previously-tracked handles before starting guards against duplicate
+  // timers if this script were ever re-initialized on the same page.
+  if (window.__hostingerIncomeLoop) cancelAnimationFrame(window.__hostingerIncomeLoop);
+  if (window.__hostingerSaveLoop) clearInterval(window.__hostingerSaveLoop);
+  if (window.__hostingerBonusIndicatorLoop) clearInterval(window.__hostingerBonusIndicatorLoop);
+  if (window.__hostingerBonusSpawnTimeout) clearTimeout(window.__hostingerBonusSpawnTimeout);
+  if (window.__hostingerBonusHideTimeout) clearTimeout(window.__hostingerBonusHideTimeout);
+
+  var lastTickTime = performance.now();
+
+  function incomeTick(now) {
+    var elapsedSeconds = (now - lastTickTime) / 1000;
+    lastTickTime = now;
+    var rps = ratePerSec();
+    if (rps > 0 && elapsedSeconds > 0) {
+      addWebsites(rps * elapsedSeconds);
+    }
+    window.__hostingerIncomeLoop = requestAnimationFrame(incomeTick);
+  }
+  window.__hostingerIncomeLoop = requestAnimationFrame(incomeTick);
+
+  // Persist to localStorage on its own slower cadence so continuous
+  // per-frame income doesn't hammer disk I/O with constant writes.
+  window.__hostingerSaveLoop = setInterval(saveGame, 1000);
+
+  window.__hostingerBonusIndicatorLoop = setInterval(updateBonusIndicator, 250);
+  scheduleNextBonusSpawn();
+
+  loadSave();
+  lastTickTime = performance.now();
+  render();
+})();
+</script>
+
+</body>
+</html>
