@@ -346,7 +346,7 @@ function VendorsContent() {
         <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
           Budget Breakdown
         </h3>
-        <Accordion type="multiple" collapsible className="mt-4 overflow-hidden rounded-xl border border-border">
+        <Accordion type="multiple" className="mt-4 overflow-hidden rounded-xl border border-border">
           {BUDGET_ITEMS.map((item) => (
             <AccordionItem
               key={item.id}
