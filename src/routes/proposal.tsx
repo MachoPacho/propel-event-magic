@@ -43,7 +43,7 @@ const SECTIONS = [
   {
     id: "vendors",
     label: "Vendors & Budget",
-    content: "[Content coming soon]",
+    content: <VendorsContent />,
   },
 ] as const;
 
