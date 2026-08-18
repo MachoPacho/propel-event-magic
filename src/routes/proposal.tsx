@@ -268,6 +268,107 @@ function ExperienceContent() {
   );
 }
 
+function VendorsContent() {
+  return (
+    <div className="space-y-8">
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Budget Priorities
+        </h3>
+        <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
+          With a fixed €10,000 budget, spending was prioritized in this order:{" "}
+          <strong>equipment and technical setup first</strong> (the silent disco and Portal link are
+          what make the "one event, two cities" concept actually work),{" "}
+          <strong>then music licensing</strong> (a legal requirement for any live DJ setup),{" "}
+          <strong>then the employee takeaway</strong>, <strong>then catering</strong>, and{" "}
+          <strong>decorations/atmosphere last</strong>. This ordering reflects a simple principle:
+          the interactive, connective elements of the celebration take priority over decorative
+          ones.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Budget Breakdown
+        </h3>
+        <div className="mt-4 overflow-hidden rounded-xl border border-border">
+          <table className="w-full text-left text-sm text-card-foreground/80">
+            <thead className="bg-muted/50 text-card-foreground">
+              <tr>
+                <th className="px-4 py-3 font-semibold">Category</th>
+                <th className="px-4 py-3 font-semibold">Details</th>
+                <th className="px-4 py-3 font-semibold">Cost</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              <tr>
+                <td className="px-4 py-3 align-top font-medium">Equipment</td>
+                <td className="px-4 py-3">
+                  200 silent disco headsets (100 per office) + 2 DJs, Portal screen rental for the
+                  live video link, technical reserve
+                </td>
+                <td className="px-4 py-3 align-top whitespace-nowrap">€3,200</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 align-top font-medium">Music licensing</td>
+                <td className="px-4 py-3">
+                  Public performance licensing for live DJ sets, both offices
+                </td>
+                <td className="px-4 py-3 align-top whitespace-nowrap">€200</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 align-top font-medium">Employee takeaway</td>
+                <td className="px-4 py-3">
+                  Small in-office gift (~260 people) + digital voucher for remote employees (~100
+                  people)
+                </td>
+                <td className="px-4 py-3 align-top whitespace-nowrap">€2,560</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 align-top font-medium">Catering</td>
+                <td className="px-4 py-3">Single vendor serving both Vilnius and Kaunas identically</td>
+                <td className="px-4 py-3 align-top whitespace-nowrap">€3,380</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 align-top font-medium">Decorations & atmosphere</td>
+                <td className="px-4 py-3">Visual styling for both venues</td>
+                <td className="px-4 py-3 align-top whitespace-nowrap">€640</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 align-top font-semibold">Total</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 align-top whitespace-nowrap font-semibold">€9,980</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
+          The full amount stays within the €10,000 limit, with a small buffer for last-minute
+          adjustments.
+        </p>
+      </section>
+
+      <section>
+        <h3 className="font-display text-xl font-semibold tracking-tight text-card-foreground sm:text-2xl">
+          Vendors
+        </h3>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-card-foreground/80">
+          <li>
+            <strong>Silent disco equipment & DJs</strong> — silentdisco.lt
+          </li>
+          <li>
+            <strong>Music licensing (LATGA/AGATA)</strong> — Leidžiam.lt
+          </li>
+          <li>
+            <strong>Catering, Portal screens</strong> — vendor selection finalized during the
+            execution phase, ahead of the event date.
+          </li>
+        </ul>
+      </section>
+    </div>
+  );
+}
+
 function ProposalPage() {
   const [activeSection, setActiveSection] = useState<SectionId>("concept");
 
