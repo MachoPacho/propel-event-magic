@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { OG_IMAGE_META } from "@/lib/og-meta";
 import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
