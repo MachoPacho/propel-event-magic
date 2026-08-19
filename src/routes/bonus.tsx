@@ -117,7 +117,7 @@ function BonusPage() {
               {reelOpen ? (
                 <div className="flex justify-center py-2">
                   <iframe
-                    src="https://www.instagram.com/reel/DcIWlN5uHjM/embed"
+                    src="https://www.instagram.com/reel/DcIWlN5uHjM"
                     width="400"
                     height="700"
                     frameBorder="0"
