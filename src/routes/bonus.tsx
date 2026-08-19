@@ -92,22 +92,20 @@ function BonusPage() {
         </Link>
       </div>
 
-      <section className="mt-14">
-        <p className="text-center text-sm leading-relaxed text-muted-foreground">
+      <section className="mt-14 text-center">
+        <p className="text-sm leading-relaxed text-muted-foreground">
           While researching silent disco setups, I found this — proof it works even when someone's
           just belting out a cappella into 200 pairs of headphones.
         </p>
-        <div className="mt-5 flex justify-center">
-          <a
-            href="https://www.instagram.com/reel/DcIWlN5uHjM/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-auto flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
-          >
-            <Instagram className="h-6 w-6 shrink-0 text-foreground" />
-            <span className="font-medium">Watch on Instagram ↗</span>
-          </a>
-        </div>
+        <a
+          href="https://www.instagram.com/reel/DcIWlN5uHjM/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
+        >
+          <Instagram className="h-6 w-6 shrink-0 text-foreground" />
+          <span className="font-medium">Watch on Instagram ↗</span>
+        </a>
       </section>
     </div>
   );
