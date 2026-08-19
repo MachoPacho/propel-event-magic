@@ -329,7 +329,7 @@ const BUDGET_ITEMS = [
     category: "Employee takeaway",
     total: "€2,560",
     items: [
-      { label: "In-office gifts, ~260 people × €6", cost: "€1,560" },
+      { label: "In-office gifts — custom 3D-printed '10,000,000' novelty glasses, ~260 people (estimate, pending final quote)", cost: "€1,560" },
       { label: "Remote digital vouchers, ~100 people × €10", cost: "€1,000" },
     ],
   },
@@ -420,8 +420,12 @@ function VendorsContent() {
             <strong>Music licensing (LATGA/AGATA)</strong> — Leidžiam.lt
           </li>
           <li>
-            <strong>Catering, Portal screens</strong> — vendor selection finalized during the
-            execution phase, ahead of the event date.
+            <strong>Gift production (3D-printed glasses)</strong> — AKORE (akore.lt), pending final
+            quote.
+          </li>
+          <li>
+            <strong>Catering, Portal screens, gift production</strong> — vendor selection finalized
+            during the execution phase, ahead of the event date.
           </li>
         </ul>
       </section>
