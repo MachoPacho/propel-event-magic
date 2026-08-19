@@ -157,19 +157,21 @@ function BonusPage() {
           While researching silent disco setups, I found this — proof it works even when someone's
           just belting out a cappella into 200 pairs of headphones.
         </p>
-        <div className="mt-5 flex justify-center">
-          <blockquote
-            className="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DcIWlN5uHjM/"
-            data-instgrm-version="14"
-            style={{
-              maxWidth: "540px",
-              minWidth: "326px",
-              margin: "0 auto",
-              width: "100%",
-            }}
-          />
-        </div>
+        <Accordion
+          type="multiple"
+          value={openItems}
+          onValueChange={setOpenItems}
+          className="mt-5 overflow-hidden rounded-xl border border-border"
+        >
+          <AccordionItem value="reel" className="border-0">
+            <AccordionTrigger className="px-4 text-card-foreground hover:no-underline">
+              Watch the clip
+            </AccordionTrigger>
+            <AccordionContent className="px-4">
+              {reelOpen ? <InstagramReel /> : null}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </section>
     </div>
   );
