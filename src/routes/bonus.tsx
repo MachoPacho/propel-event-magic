@@ -114,7 +114,24 @@ function BonusPage() {
               Watch the clip
             </AccordionTrigger>
             <AccordionContent className="px-4">
-              {reelOpen ? <InstagramReel /> : null}
+              {reelOpen ? (
+                <div className="flex justify-center py-2">
+                  <iframe
+                    src="https://www.instagram.com/reel/DcIWlN5uHjM/embed"
+                    width="400"
+                    height="700"
+                    frameBorder="0"
+                    scrolling="no"
+                    allowTransparency={true}
+                    style={{
+                      maxWidth: "100%",
+                      margin: "0 auto",
+                      display: "block",
+                      borderRadius: "12px",
+                    }}
+                  />
+                </div>
+              ) : null}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
