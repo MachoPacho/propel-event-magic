@@ -321,6 +321,42 @@ function ExperienceContent() {
   );
 }
 
+function StreamTabs() {
+  const [city, setCity] = useState<"vilnius" | "kaunas">("vilnius");
+
+  return (
+    <div className="mt-6 rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5">
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => setCity("vilnius")}
+          className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+            city === "vilnius"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+          }`}
+        >
+          Watch: Vilnius
+        </button>
+        <button
+          type="button"
+          onClick={() => setCity("kaunas")}
+          className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+            city === "kaunas"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+          }`}
+        >
+          Watch: Kaunas
+        </button>
+      </div>
+      <p className="mt-4 text-center text-sm text-muted-foreground">
+        Stream starts at 17:30 (event day)
+      </p>
+    </div>
+  );
+}
+
 const BUDGET_ITEMS = [
   {
     id: "equipment",
