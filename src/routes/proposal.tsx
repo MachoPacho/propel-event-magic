@@ -453,11 +453,27 @@ function VendorsContent() {
 
 function ProposalPage() {
   const [activeSection, setActiveSection] = useState<SectionId>("concept");
+  const navScrollRef = useRef<HTMLDivElement | null>(null);
+  const pillRefs = useRef<Record<SectionId, HTMLButtonElement | null>>({
+    concept: null,
+    experience: null,
+    vendors: null,
+  });
   const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({
     concept: null,
     experience: null,
     vendors: null,
   });
+
+  useEffect(() => {
+    const row = navScrollRef.current;
+    const pill = pillRefs.current[activeSection];
+    if (!row || !pill) return;
+    if (row.scrollWidth <= row.clientWidth) return;
+    const target = pill.offsetLeft - (row.clientWidth - pill.offsetWidth) / 2;
+    row.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+  }, [activeSection]);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
