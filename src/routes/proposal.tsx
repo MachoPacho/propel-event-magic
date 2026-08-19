@@ -488,7 +488,7 @@ function ProposalPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl overflow-x-hidden px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-10">
         <Link
           to="/"
@@ -504,15 +504,12 @@ function ProposalPage() {
         </p>
       </div>
 
-      <div className="grid min-w-0 gap-8 lg:grid-cols-[240px_1fr]">
+      <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
         <nav
           aria-label="Jump to section"
-          className="relative min-w-0 max-w-full lg:sticky lg:top-24 lg:self-start"
+          className="min-w-0 lg:sticky lg:top-24 lg:self-start"
         >
-          <div
-            className="scrollbar-hide -mx-4 flex min-w-0 max-w-full touch-pan-x flex-row flex-nowrap gap-2 overflow-x-auto overflow-y-hidden whitespace-nowrap px-4 pb-2 pr-10 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:whitespace-normal lg:px-0 lg:pb-0 lg:pr-0"
-            style={{ WebkitOverflowScrolling: "touch" }}
-          >
+          <div className="scrollbar-hide -mx-4 flex min-w-0 touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
@@ -527,12 +524,7 @@ function ProposalPage() {
               </button>
             ))}
           </div>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-[-1rem] w-6 bg-gradient-to-r from-transparent to-background lg:hidden"
-          />
         </nav>
-
 
         <div className="space-y-8">
           {SECTIONS.map((section) => (
