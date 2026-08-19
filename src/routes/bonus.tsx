@@ -1,12 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { Instagram } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
@@ -31,9 +24,6 @@ export const Route = createFileRoute("/bonus")({
 });
 
 function BonusPage() {
-  const [openItems, setOpenItems] = useState<string[]>([]);
-  const reelOpen = openItems.includes("reel");
-
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <Link
