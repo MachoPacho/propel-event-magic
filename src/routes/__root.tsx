@@ -165,6 +165,7 @@ function Footer() {
         <p className="text-sm text-muted-foreground">
           Built as an interactive application for the Event Manager position at Hostinger.
         </p>
+        <p className="mt-2 text-xs text-muted-foreground">Prepared by Jonas Mačiukas</p>
       </div>
     </footer>
   );
