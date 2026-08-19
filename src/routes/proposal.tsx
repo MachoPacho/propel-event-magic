@@ -453,6 +453,39 @@ function VendorsContent() {
 
 function ProposalPage() {
   const [activeSection, setActiveSection] = useState<SectionId>("concept");
+  const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({
+    concept: null,
+    experience: null,
+    vendors: null,
+  });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id as SectionId);
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    SECTIONS.forEach((section) => {
+      const el = sectionRefs.current[section.id];
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: SectionId) => {
+    const el = sectionRefs.current[id];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -477,7 +510,7 @@ function ProposalPage() {
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
-                onClick={() => setActiveSection(section.id)}
+                onClick={() => scrollToSection(section.id)}
                 className={`shrink-0 rounded-lg px-4 py-3 text-left text-sm font-medium transition-all ${
                   activeSection === section.id
                     ? "bg-primary text-primary-foreground shadow-sm"
@@ -490,24 +523,26 @@ function ProposalPage() {
           </div>
         </nav>
 
-        <section
-          key={activeSection}
-          className="animate-fade-in rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-10"
-        >
-          {SECTIONS.map((section) =>
-            section.id === activeSection ? (
-              <div key={section.id}>
-                <h2 className="font-display text-2xl font-semibold tracking-tight text-card-foreground sm:text-3xl">
-                  {section.label}
-                </h2>
-                <div className="mt-6 h-px w-full bg-border" />
-                <div className="mt-6 text-base leading-relaxed text-card-foreground/80">
-                  {section.content}
-                </div>
+        <div className="space-y-8">
+          {SECTIONS.map((section) => (
+            <section
+              key={section.id}
+              id={section.id}
+              ref={(el) => {
+                sectionRefs.current[section.id] = el;
+              }}
+              className="scroll-mt-28 rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-10"
+            >
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-card-foreground sm:text-3xl">
+                {section.label}
+              </h2>
+              <div className="mt-6 h-px w-full bg-border" />
+              <div className="mt-6 text-base leading-relaxed text-card-foreground/80">
+                {section.content}
               </div>
-            ) : null,
-          )}
-        </section>
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );
