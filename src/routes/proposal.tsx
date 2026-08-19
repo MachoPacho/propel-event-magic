@@ -244,7 +244,8 @@ function ExperienceContent() {
             listening channels: your local DJ, and a cross-city channel to tune into the other
             office's DJ live. The headsets technically support a third channel — extending live audio
             to remote employees is a possible future direction, pending a technical conversation with
-            the vendor, and isn't part of this plan.
+            the vendor. (Remote employees do get an optional way to tune into the atmosphere live — see
+            below.)
           </li>
           <li>
             <strong>Virtual Canvas</strong> — a collaborative visual board that remote employees
@@ -271,11 +272,17 @@ function ExperienceContent() {
           Remote Employee Experience
         </h3>
         <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
-          Full live participation in the evening isn't realistic across time zones, so remote
-          colleagues get two dedicated ways in: real-time control of the visual channel powering the
-          silent disco's shared board, and a short (2–3 minute) highlight video published within
-          24–48 hours after the event, capturing the atmosphere of both offices.
+          Full live participation in the evening isn't realistic across time zones, so the highlight
+          video (published within 24–48 hours) is the one guaranteed way every remote employee
+          experiences the event, regardless of location. On top of that, we're adding an optional
+          layer for anyone who wants to tune in live during the event itself: a simple camera + audio
+          feed from each office's DJ area (17:30–19:30), streamed on this site. Remote employees can
+          pick whichever city's feed they'd like to watch — Vilnius or Kaunas — similar in spirit to
+          the cross-city channel in the headsets, just delivered as video instead. This is a
+          nice-to-have for whoever's time zone allows it, not a replacement for the highlight video.
         </p>
+
+        <StreamTabs />
       </section>
 
       <section>
