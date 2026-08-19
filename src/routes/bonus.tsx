@@ -102,7 +102,7 @@ function BonusPage() {
             href="https://www.instagram.com/reel/DcIWlN5uHjM/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
+            className="mx-auto flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
           >
             <Instagram className="h-6 w-6 shrink-0 text-foreground" />
             <span className="font-medium">Watch on Instagram ↗</span>
