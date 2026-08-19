@@ -507,12 +507,18 @@ function ProposalPage() {
       <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
         <nav
           aria-label="Jump to section"
-          className="min-w-0 lg:sticky lg:top-24 lg:self-start"
+          className="sticky top-14 z-30 -mx-4 min-w-0 border-b border-border/50 bg-background px-4 py-2 sm:-mx-6 sm:px-6 lg:top-24 lg:z-auto lg:mx-0 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:self-start"
         >
-          <div className="scrollbar-hide -mx-4 flex min-w-0 touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
+          <div
+            ref={navScrollRef}
+            className="scrollbar-hide -mx-4 flex min-w-0 touch-pan-x flex-row gap-2 overflow-x-auto px-4 lg:mx-0 lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0"
+          >
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
+                ref={(el) => {
+                  pillRefs.current[section.id] = el;
+                }}
                 onClick={() => scrollToSection(section.id)}
                 className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium transition-all lg:whitespace-normal lg:px-4 lg:py-3 ${
                   activeSection === section.id
@@ -525,6 +531,7 @@ function ProposalPage() {
             ))}
           </div>
         </nav>
+
 
         <div className="space-y-8">
           {SECTIONS.map((section) => (
