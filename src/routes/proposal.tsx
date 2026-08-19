@@ -485,8 +485,8 @@ function VendorsContent() {
             quote.
           </li>
           <li>
-            <strong>Catering, Portal screens, gift production</strong> — vendor selection finalized
-            during the execution phase, ahead of the event date.
+            <strong>Catering, Portal screens</strong> — vendor selection finalized during the
+            execution phase, ahead of the event date.
           </li>
         </ul>
       </section>
