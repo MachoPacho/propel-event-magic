@@ -75,7 +75,9 @@ function ConceptContent() {
             moment with "10,000,000 Online" — a playful nod to our own "Three. Two. Online."
             tagline. At exactly 15:00 (Lithuania time), a synchronized counter reaches 10,000,000
             simultaneously on screens in Vilnius and Kaunas, followed by a toast and a group
-            photo in both offices at once.
+            photo in both offices at once. 15:00 Lithuania time was also chosen with our international
+            remote colleagues in mind — it lands at a reasonable morning hour in Brazil and evening
+            in Indonesia.
           </p>
           <p>
             <strong>Design note:</strong> for precision, the 15:00 moment is a pre-choreographed
@@ -237,9 +239,16 @@ function ExperienceContent() {
         <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-card-foreground/80">
           <li>
             <strong>Silent disco</strong> — 200 headsets across both offices, two live DJs, and two
-            listening channels: your local DJ, a cross-city channel to tune into the other office's
-            DJ live, and a shared collaborative board that remote employees control in real time,
-            projected as visuals behind the DJs.
+            listening channels: your local DJ, and a cross-city channel to tune into the other
+            office's DJ live. The headsets technically support a third channel — extending live audio
+            to remote employees is a possible future direction, pending a technical conversation with
+            the vendor, and isn't part of this plan.
+          </li>
+          <li>
+            <strong>Virtual Canvas</strong> — a collaborative visual board that remote employees
+            control live from the website, projected on a large screen behind the DJs in both
+            offices simultaneously. This is remote employees' main way to actively shape something
+            both physical locations experience together in real time.
           </li>
           <li>
             <strong>The Portal</strong> — a live video link between Vilnius and Kaunas lets
@@ -406,6 +415,13 @@ function VendorsContent() {
           The full amount stays within the €10,000 limit, with a small buffer for last-minute
           adjustments.
         </p>
+        <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4 text-sm leading-relaxed text-card-foreground/80">
+          <strong>Note:</strong> this budget assumes Hostinger's internal media/content team covers
+          event-day photography and the highlight video edit at no additional cost. If that
+          assumption doesn't hold, external photography and videography for both offices would add an
+          estimated €600–1,200, which would exceed the current budget — this is flagged here for
+          transparency rather than hidden.
+        </div>
       </section>
 
       <section>
