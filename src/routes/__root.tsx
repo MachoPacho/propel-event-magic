@@ -165,6 +165,7 @@ function Footer() {
         <p className="text-sm text-muted-foreground">
           Built as an interactive application for the Event Manager position at Hostinger.
         </p>
+        <p className="mt-2 text-xs text-muted-foreground">Prepared by Jonas Mačiukas</p>
       </div>
     </footer>
   );
@@ -172,7 +173,6 @@ function Footer() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -182,11 +182,6 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        {pathname === "/" && (
-          <div className="bg-background py-3 text-center">
-            <p className="text-xs text-muted-foreground">Prepared by Jonas Mačiukas</p>
-          </div>
-        )}
       </div>
     </QueryClientProvider>
   );
