@@ -415,6 +415,13 @@ function VendorsContent() {
           The full amount stays within the €10,000 limit, with a small buffer for last-minute
           adjustments.
         </p>
+        <div className="mt-4 rounded-lg border border-border bg-muted/40 p-4 text-sm leading-relaxed text-card-foreground/80">
+          <strong>Note:</strong> this budget assumes Hostinger's internal media/content team covers
+          event-day photography and the highlight video edit at no additional cost. If that
+          assumption doesn't hold, external photography and videography for both offices would add an
+          estimated €600–1,200, which would exceed the current budget — this is flagged here for
+          transparency rather than hidden.
+        </div>
       </section>
 
       <section>
