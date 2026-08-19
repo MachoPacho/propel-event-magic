@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
+import { OG_IMAGE_META } from "@/lib/og-meta";
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
@@ -17,8 +18,10 @@ export const Route = createFileRoute("/bonus")({
           "An independent, additional initiative created alongside the official Hostinger Event Manager application.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://10m.online/bonus" },
+      ...OG_IMAGE_META,
     ],
+    links: [{ rel: "canonical", href: "https://10m.online/bonus" }],
   }),
   component: BonusPage,
 });
@@ -99,7 +102,7 @@ function BonusPage() {
             href="https://www.instagram.com/reel/DcIWlN5uHjM/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
+            className="mx-auto flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
           >
             <Instagram className="h-6 w-6 shrink-0 text-foreground" />
             <span className="font-medium">Watch on Instagram ↗</span>

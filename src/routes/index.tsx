@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { OG_IMAGE_META } from "@/lib/og-meta";
 import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -17,8 +18,10 @@ export const Route = createFileRoute("/")({
           "An interactive landing experience for the Event Manager application at Hostinger.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://10m.online/" },
+      ...OG_IMAGE_META,
     ],
+    links: [{ rel: "canonical", href: "https://10m.online/" }],
   }),
   component: LandingPage,
 });
