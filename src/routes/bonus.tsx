@@ -104,33 +104,17 @@ function BonusPage() {
           While researching silent disco setups, I found this — proof it works even when someone's
           just belting out a cappella into 200 pairs of headphones.
         </p>
-        <Accordion
-          type="multiple"
-          value={openItems}
-          onValueChange={setOpenItems}
-          className="mt-5 overflow-hidden rounded-xl border border-border"
-        >
-          <AccordionItem value="reel" className="border-0">
-            <AccordionTrigger className="px-4 text-card-foreground hover:no-underline">
-              Watch the clip
-            </AccordionTrigger>
-            <AccordionContent className="px-4">
-              {reelOpen ? (
-                <div className="flex justify-center py-3">
-                  <a
-                    href="https://www.instagram.com/reel/DcIWlN5uHjM/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
-                  >
-                    <Instagram className="h-6 w-6 shrink-0 text-foreground" />
-                    <span className="font-medium">Watch on Instagram ↗</span>
-                  </a>
-                </div>
-              ) : null}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        <div className="mt-5 flex justify-center">
+          <a
+            href="https://www.instagram.com/reel/DcIWlN5uHjM/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
+          >
+            <Instagram className="h-6 w-6 shrink-0 text-foreground" />
+            <span className="font-medium">Watch on Instagram ↗</span>
+          </a>
+        </div>
       </section>
     </div>
   );
