@@ -25,12 +25,13 @@ export const Route = createFileRoute("/proposal")({
           "Event concept, logistics, employee experience, vendors, and budget for the Hostinger Event Manager application.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://10m.online/proposal" },
+      ...OG_IMAGE_META,
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://propel-event-magic.lovable.app/proposal",
+        href: "https://10m.online/proposal",
       },
     ],
     scripts: [

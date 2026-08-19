@@ -17,8 +17,10 @@ export const Route = createFileRoute("/game")({
           "Play the independent Grow Hostinger game created as an additional initiative for the Event Manager application.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://10m.online/game" },
+      ...OG_IMAGE_META,
     ],
+    links: [{ rel: "canonical", href: "https://10m.online/game" }],
   }),
   component: GrowHostingerPage,
 });

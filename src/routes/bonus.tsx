@@ -18,8 +18,10 @@ export const Route = createFileRoute("/bonus")({
           "An independent, additional initiative created alongside the official Hostinger Event Manager application.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://10m.online/bonus" },
+      ...OG_IMAGE_META,
     ],
+    links: [{ rel: "canonical", href: "https://10m.online/bonus" }],
   }),
   component: BonusPage,
 });
