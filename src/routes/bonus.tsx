@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Instagram } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -115,21 +116,16 @@ function BonusPage() {
             </AccordionTrigger>
             <AccordionContent className="px-4">
               {reelOpen ? (
-                <div className="flex justify-center py-2">
-                  <iframe
-                    src="https://www.instagram.com/reel/DcIWlN5uHjM"
-                    width="400"
-                    height="700"
-                    frameBorder="0"
-                    scrolling="no"
-                    allowTransparency={true}
-                    style={{
-                      maxWidth: "100%",
-                      margin: "0 auto",
-                      display: "block",
-                      borderRadius: "12px",
-                    }}
-                  />
+                <div className="flex justify-center py-3">
+                  <a
+                    href="https://www.instagram.com/reel/DcIWlN5uHjM/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full max-w-sm items-center gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground transition-colors hover:bg-accent/50"
+                  >
+                    <Instagram className="h-6 w-6 shrink-0 text-foreground" />
+                    <span className="font-medium">Watch on Instagram ↗</span>
+                  </a>
                 </div>
               ) : null}
             </AccordionContent>
