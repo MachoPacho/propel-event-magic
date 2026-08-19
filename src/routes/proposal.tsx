@@ -272,10 +272,32 @@ function ExperienceContent() {
           Memorable Takeaway
         </h3>
         <p className="mt-4 text-base leading-relaxed text-card-foreground/80">
-          Every in-office attendee receives a small physical gift to mark the milestone. Remote
-          employees receive a digital voucher (an audiobook platform subscription, for example) — a
-          takeaway that works just as well wherever they're logging in from.
+          Every in-office attendee receives a custom-designed gift marking the milestone: a pair of
+          "10,000,000" novelty glasses, in the spirit of classic New Year's Eve number glasses —
+          designed specifically for this celebration and produced via 3D printing. Remote employees
+          receive a digital voucher (an audiobook platform subscription, for example).
         </p>
+
+        <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
+          <model-viewer
+            src="/gift-glasses.glb"
+            camera-controls
+            auto-rotate
+            rotation-per-second="20deg"
+            shadow-intensity="0.5"
+            exposure="1"
+            style={{
+              width: "100%",
+              maxWidth: "480px",
+              height: "380px",
+              margin: "0 auto",
+              display: "block",
+            }}
+          />
+          <p className="mt-3 text-center text-sm text-muted-foreground">
+            Interactive 3D preview — drag to rotate.
+          </p>
+        </div>
       </section>
     </div>
   );
