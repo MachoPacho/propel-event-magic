@@ -84,28 +84,8 @@ export const Route = createFileRoute("/bonus")({
 });
 
 function BonusPage() {
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const existing = document.querySelector(
-      'script[src*="instagram.com/embed.js"]'
-    ) as HTMLScriptElement | null;
-
-    const processEmbeds = () => {
-      const instgrm = (window as unknown as { instgrm?: { Embeds: { process: () => void } } }).instgrm;
-      instgrm?.Embeds.process();
-    };
-
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = "https://www.instagram.com/embed.js";
-      script.async = true;
-      script.onload = processEmbeds;
-      document.body.appendChild(script);
-    } else {
-      processEmbeds();
-    }
-  }, []);
+  const [openItems, setOpenItems] = useState<string[]>([]);
+  const reelOpen = openItems.includes("reel");
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
