@@ -1,5 +1,65 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+type Instgrm = { Embeds: { process: () => void } };
+
+function loadInstagramEmbed(onReady: () => void) {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as { instgrm?: Instgrm };
+  if (w.instgrm) {
+    onReady();
+    return;
+  }
+  let script = document.querySelector<HTMLScriptElement>(
+    'script[src*="instagram.com/embed.js"]'
+  );
+  if (!script) {
+    script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+  script.addEventListener("load", onReady, { once: true });
+}
+
+function InstagramReel() {
+  useEffect(() => {
+    let cancelled = false;
+    const process = () => {
+      if (cancelled) return;
+      requestAnimationFrame(() => {
+        const w = window as unknown as { instgrm?: Instgrm };
+        w.instgrm?.Embeds.process();
+      });
+    };
+    loadInstagramEmbed(process);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <div className="flex justify-center py-2">
+      <blockquote
+        className="instagram-media"
+        data-instgrm-permalink="https://www.instagram.com/reel/DcIWlN5uHjM/"
+        data-instgrm-version="14"
+        style={{
+          maxWidth: "540px",
+          minWidth: "326px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+      />
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
@@ -24,28 +84,8 @@ export const Route = createFileRoute("/bonus")({
 });
 
 function BonusPage() {
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const existing = document.querySelector(
-      'script[src*="instagram.com/embed.js"]'
-    ) as HTMLScriptElement | null;
-
-    const processEmbeds = () => {
-      const instgrm = (window as unknown as { instgrm?: { Embeds: { process: () => void } } }).instgrm;
-      instgrm?.Embeds.process();
-    };
-
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = "https://www.instagram.com/embed.js";
-      script.async = true;
-      script.onload = processEmbeds;
-      document.body.appendChild(script);
-    } else {
-      processEmbeds();
-    }
-  }, []);
+  const [openItems, setOpenItems] = useState<string[]>([]);
+  const reelOpen = openItems.includes("reel");
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
@@ -117,19 +157,21 @@ function BonusPage() {
           While researching silent disco setups, I found this — proof it works even when someone's
           just belting out a cappella into 200 pairs of headphones.
         </p>
-        <div className="mt-5 flex justify-center">
-          <blockquote
-            className="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DcIWlN5uHjM/"
-            data-instgrm-version="14"
-            style={{
-              maxWidth: "540px",
-              minWidth: "326px",
-              margin: "0 auto",
-              width: "100%",
-            }}
-          />
-        </div>
+        <Accordion
+          type="multiple"
+          value={openItems}
+          onValueChange={setOpenItems}
+          className="mt-5 overflow-hidden rounded-xl border border-border"
+        >
+          <AccordionItem value="reel" className="border-0">
+            <AccordionTrigger className="px-4 text-card-foreground hover:no-underline">
+              Watch the clip
+            </AccordionTrigger>
+            <AccordionContent className="px-4">
+              {reelOpen ? <InstagramReel /> : null}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </section>
     </div>
   );
