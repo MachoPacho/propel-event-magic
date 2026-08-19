@@ -94,8 +94,8 @@ function BonusPage() {
 
       <section className="mt-14 text-center">
         <p className="text-sm leading-relaxed text-muted-foreground">
-          While researching silent disco setups, I found this — proof it works even when someone's
-          just belting out a cappella into 200 pairs of headphones.
+          Couldn't resist sharing this — it's too relevant not to. Watch how a silent disco can
+          look like an amazing time and completely ridiculous, all at the same time.
         </p>
         <a
           href="https://www.instagram.com/reel/DcIWlN5uHjM/"
