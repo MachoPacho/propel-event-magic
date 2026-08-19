@@ -509,12 +509,12 @@ function ProposalPage() {
           aria-label="Jump to section"
           className="min-w-0 lg:sticky lg:top-24 lg:self-start"
         >
-          <div className="grid grid-cols-2 gap-2 lg:flex lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible">
+          <div className="scrollbar-hide -mx-4 flex min-w-0 touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`rounded-lg px-3 py-2 text-left text-sm font-medium whitespace-normal transition-all lg:px-4 lg:py-3 ${
+                className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium transition-all lg:whitespace-normal lg:px-4 lg:py-3 ${
                   activeSection === section.id
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
