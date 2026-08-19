@@ -34,7 +34,7 @@ export const Route = createFileRoute("/proposal")({
     ],
     scripts: [
       {
-        src: "https://ar.esm.sh/@google/model-viewer",
+        src: "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js",
         type: "module",
       },
     ],
