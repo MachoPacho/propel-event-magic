@@ -32,6 +32,12 @@ export const Route = createFileRoute("/proposal")({
         href: "https://propel-event-magic.lovable.app/proposal",
       },
     ],
+    scripts: [
+      {
+        src: "https://ar.esm.sh/@google/model-viewer",
+        type: "module",
+      },
+    ],
   }),
   component: ProposalPage,
 });
