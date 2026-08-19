@@ -505,13 +505,16 @@ function ProposalPage() {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
-        <nav className="lg:sticky lg:top-24 lg:self-start">
-          <div className="flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+        <nav
+          aria-label="Jump to section"
+          className="lg:sticky lg:top-24 lg:self-start"
+        >
+          <div className="scrollbar-hide -mx-4 flex touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`shrink-0 rounded-lg px-4 py-3 text-left text-sm font-medium transition-all ${
+                className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium transition-all lg:whitespace-normal lg:px-4 lg:py-3 ${
                   activeSection === section.id
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
