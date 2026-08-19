@@ -1,5 +1,65 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+type Instgrm = { Embeds: { process: () => void } };
+
+function loadInstagramEmbed(onReady: () => void) {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as { instgrm?: Instgrm };
+  if (w.instgrm) {
+    onReady();
+    return;
+  }
+  let script = document.querySelector<HTMLScriptElement>(
+    'script[src*="instagram.com/embed.js"]'
+  );
+  if (!script) {
+    script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+  script.addEventListener("load", onReady, { once: true });
+}
+
+function InstagramReel() {
+  useEffect(() => {
+    let cancelled = false;
+    const process = () => {
+      if (cancelled) return;
+      requestAnimationFrame(() => {
+        const w = window as unknown as { instgrm?: Instgrm };
+        w.instgrm?.Embeds.process();
+      });
+    };
+    loadInstagramEmbed(process);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <div className="flex justify-center py-2">
+      <blockquote
+        className="instagram-media"
+        data-instgrm-permalink="https://www.instagram.com/reel/DcIWlN5uHjM/"
+        data-instgrm-version="14"
+        style={{
+          maxWidth: "540px",
+          minWidth: "326px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+      />
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
