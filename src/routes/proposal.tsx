@@ -509,7 +509,7 @@ function ProposalPage() {
           aria-label="Jump to section"
           className="lg:sticky lg:top-24 lg:self-start"
         >
-          <div className="scrollbar-hide -mx-4 flex touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
+          <div className="scrollbar-hide -mx-4 flex min-w-0 touch-pan-x flex-row gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:min-w-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0">
             {SECTIONS.map((section) => (
               <button
                 key={section.id}
