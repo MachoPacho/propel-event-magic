@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
@@ -23,6 +24,29 @@ export const Route = createFileRoute("/bonus")({
 });
 
 function BonusPage() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const existing = document.querySelector(
+      'script[src*="instagram.com/embed.js"]'
+    ) as HTMLScriptElement | null;
+
+    const processEmbeds = () => {
+      const instgrm = (window as unknown as { instgrm?: { Embeds: { process: () => void } } }).instgrm;
+      instgrm?.Embeds.process();
+    };
+
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = "https://www.instagram.com/embed.js";
+      script.async = true;
+      script.onload = processEmbeds;
+      document.body.appendChild(script);
+    } else {
+      processEmbeds();
+    }
+  }, []);
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <Link
@@ -87,6 +111,26 @@ function BonusPage() {
           Play the Game →
         </Link>
       </div>
+
+      <section className="mt-14">
+        <p className="text-center text-sm leading-relaxed text-muted-foreground">
+          While researching silent disco setups, I found this — proof it works even when someone's
+          just belting out a cappella into 200 pairs of headphones.
+        </p>
+        <div className="mt-5 flex justify-center">
+          <blockquote
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DcIWlN5uHjM/"
+            data-instgrm-version="14"
+            style={{
+              maxWidth: "540px",
+              minWidth: "326px",
+              margin: "0 auto",
+              width: "100%",
+            }}
+          />
+        </div>
+      </section>
     </div>
   );
 }
