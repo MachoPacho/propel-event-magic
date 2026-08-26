@@ -291,21 +291,7 @@ function ExperienceContent() {
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
-          <model-viewer
-            src="/gift-glasses.glb"
-            camera-controls
-            auto-rotate
-            rotation-per-second="20deg"
-            shadow-intensity="0.5"
-            exposure="1"
-            style={{
-              width: "100%",
-              maxWidth: "480px",
-              height: "380px",
-              margin: "0 auto",
-              display: "block",
-            }}
-          />
+          <GlassesViewer />
           <p className="mt-3 text-center text-sm text-muted-foreground">
             Interactive 3D preview — drag to rotate.
           </p>
