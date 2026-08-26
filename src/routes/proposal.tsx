@@ -34,12 +34,6 @@ export const Route = createFileRoute("/proposal")({
         href: "https://10m.online/proposal",
       },
     ],
-    scripts: [
-      {
-        src: "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js",
-        type: "module",
-      },
-    ],
   }),
   component: ProposalPage,
 });
@@ -297,26 +291,110 @@ function ExperienceContent() {
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-6">
-          <model-viewer
-            src="/gift-glasses.glb"
-            camera-controls
-            auto-rotate
-            rotation-per-second="20deg"
-            shadow-intensity="0.5"
-            exposure="1"
-            style={{
-              width: "100%",
-              maxWidth: "480px",
-              height: "380px",
-              margin: "0 auto",
-              display: "block",
-            }}
-          />
+          <GlassesViewer />
           <p className="mt-3 text-center text-sm text-muted-foreground">
             Interactive 3D preview — drag to rotate.
           </p>
         </div>
       </section>
+    </div>
+  );
+}
+
+const MODEL_VIEWER_SCRIPT_URL =
+  "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
+
+function GlassesViewer() {
+  const [status, setStatus] = useState<"loading" | "ready" | "failed">(() =>
+    typeof customElements !== "undefined" && customElements.get("model-viewer")
+      ? "ready"
+      : "loading",
+  );
+
+  useEffect(() => {
+    if (customElements.get("model-viewer")) {
+      setStatus("ready");
+      return;
+    }
+
+    let cancelled = false;
+    const timeout = window.setTimeout(() => {
+      if (!cancelled && !customElements.get("model-viewer")) setStatus("failed");
+    }, 5000);
+
+    const script = document.createElement("script");
+    script.src = MODEL_VIEWER_SCRIPT_URL;
+    script.type = "module";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      customElements
+        .whenDefined("model-viewer")
+        .then(() => {
+          if (!cancelled) {
+            window.clearTimeout(timeout);
+            setStatus("ready");
+          }
+        })
+        .catch(() => {
+          if (!cancelled) {
+            window.clearTimeout(timeout);
+            setStatus("failed");
+          }
+        });
+    };
+    script.onerror = () => {
+      if (!cancelled) {
+        window.clearTimeout(timeout);
+        setStatus("failed");
+      }
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeout);
+    };
+  }, []);
+
+  if (status === "failed") {
+    return (
+      <div className="mx-auto flex h-[380px] w-full max-w-[480px] flex-col items-center justify-center rounded-xl bg-muted/50 px-6 text-center">
+        <p className="text-sm font-medium text-card-foreground">
+          3D preview unavailable
+        </p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          The interactive glasses preview couldn't be loaded right now — the
+          gift is a pair of 3D-printed "10,000,000" novelty glasses.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
+      {status === "loading" && (
+        <div className="absolute inset-0 z-10 flex h-[380px] w-full items-center justify-center">
+          <p className="text-sm text-muted-foreground">Loading 3D preview…</p>
+        </div>
+      )}
+      {status === "ready" && (
+        <model-viewer
+          src="/gift-glasses.glb"
+          camera-controls
+          auto-rotate
+          rotation-per-second="20deg"
+          shadow-intensity="0.5"
+          exposure="1"
+          style={{
+            width: "100%",
+            maxWidth: "480px",
+            height: "380px",
+            margin: "0 auto",
+            display: "block",
+          }}
+        />
+      )}
     </div>
   );
 }
