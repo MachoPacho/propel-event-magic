@@ -34,12 +34,6 @@ export const Route = createFileRoute("/proposal")({
         href: "https://10m.online/proposal",
       },
     ],
-    scripts: [
-      {
-        src: "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js",
-        type: "module",
-      },
-    ],
   }),
   component: ProposalPage,
 });
